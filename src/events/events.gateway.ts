@@ -4,7 +4,7 @@ import {
   SubscribeMessage,
   WsResponse,
 } from '@nestjs/websockets';
-import { Client, Server } from 'socket.io';
+import { Client, Server, Socket } from 'socket.io';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +14,12 @@ export class EventsGateway {
   server: Server;
 
   @SubscribeMessage('events')
-  findAll(client: Client, data: any): Observable<WsResponse<number>> {
+  findAll(client: Socket, data: any): Observable<WsResponse<number>> {
+    // tslint:disable-next-line: no-console
+    console.log(client.id);
+    // tslint:disable-next-line: no-console
+    // console.log(client);
+    client.broadcast.emit('newMessage', 12333);
     return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
   }
 
