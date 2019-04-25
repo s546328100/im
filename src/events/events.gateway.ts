@@ -13,6 +13,16 @@ export class EventsGateway {
   @WebSocketServer()
   server: Server;
 
+  private list = [];
+
+  @SubscribeMessage('login')
+  login(client: Socket, data: string): void {
+    console.log('sddd');
+    this.list.push({id: client.id, name: data});
+    client.emit('login', this.list)
+    // return from(this.list);
+  }
+
   @SubscribeMessage('events')
   findAll(client: Socket, data: any): Observable<WsResponse<number>> {
     // tslint:disable-next-line: no-console
