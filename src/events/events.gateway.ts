@@ -17,9 +17,9 @@ export class EventsGateway {
 
   @SubscribeMessage('login')
   login(client: Socket, data: string): void {
-    console.log('sddd');
-    this.list.push({id: client.id, name: data});
-    client.emit('login', this.list)
+    // console.log('sddd');
+    // this.list.push({id: client.id, name: data});
+    // client.emit('login', 123)
     // return from(this.list);
   }
 
@@ -29,7 +29,7 @@ export class EventsGateway {
     console.log(client.id);
     // tslint:disable-next-line: no-console
     // console.log(client);
-    client.broadcast.emit('newMessage', 12333);
+    // client.broadcast.emit('newMessage', 12333);
     return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
   }
 
