@@ -7,6 +7,8 @@ import {
 import { Client, Server, Socket } from 'socket.io';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserService } from 'src/user/user.service';
+import { Inject, forwardRef } from '@nestjs/common';
 
 @WebSocketGateway()
 export class EventsGateway {
@@ -15,12 +17,20 @@ export class EventsGateway {
 
   private list = [];
 
+  constructor(
+    @Inject(forwardRef(() => UserService))
+    private readonly userService: UserService,
+  ) {}
+
   @SubscribeMessage('login')
   login(client: Socket, data: string): void {
-    // console.log('sddd');
-    // this.list.push({id: client.id, name: data});
-    // client.emit('login', 123)
-    // return from(this.list);
+    this.userService.update(data, client.id);
+    const users = this.userService.findAll();
+    for (const key in users) {
+      if (users.hasOwnProperty(key)) {
+        this.server.sockets.to(users[key]).emit('message', `${data} 进入房间！`);
+      }
+    }
   }
 
   @SubscribeMessage('events')

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { EventsGateway } from './events/events.gateway';
 import { UserModule } from './user/user.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
-  imports: [UserModule, EventsGateway],
+  imports: [UserModule, EventsModule],
 })
 export class AppModule {}
