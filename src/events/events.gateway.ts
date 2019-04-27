@@ -7,7 +7,7 @@ import {
 import { Client, Server, Socket } from 'socket.io';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 import { Inject, forwardRef } from '@nestjs/common';
 
 @WebSocketGateway()

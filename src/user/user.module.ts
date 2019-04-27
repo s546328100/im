@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UserController } from './user.controller';
-import { EventsModule } from 'src/events/events.module';
+import { EventsModule } from '../events/events.module';
 import { UserService } from './user.service';
 
 @Module({

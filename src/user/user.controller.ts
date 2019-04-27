@@ -1,5 +1,5 @@
 import { Controller, Get, Query, Post, Body } from '@nestjs/common';
-import { EventsGateway } from 'src/events/events.gateway';
+import { EventsGateway } from '../events/events.gateway';
 import { UserService } from './user.service';
 
 @Controller('user')
