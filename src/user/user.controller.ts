@@ -13,13 +13,20 @@ export class UserController {
 
   @Post('login')
   login(@Body() param: any) {
+    return this.service.login(param.name);
+  }
+
+  @Get()
+  user() {
+    const s: string[] = [];
     const server = this.eventsGateway.server;
     const sockets = server.sockets.sockets;
     // console.log(sockets);
     Object.keys(sockets).forEach(key => {
-      console.log(key);
+      s.push(key);
       // sockets[key].emit('events', { hello: 'world' });
     });
-    return this.service.login(param.name);
+
+    return s;
   }
 }

@@ -22,6 +22,23 @@ export class EventsGateway {
     private readonly userService: UserService,
   ) {}
 
+  // afterInit(socket) {
+  //   console.log(socket.handshake);
+  //   // this.server.emit('testing', { do: 'stuff' });
+  // }
+
+  handleConnection(client: Socket) {
+    console.log(client.handshake.query);
+    // console.log('jjj', client.disconnect(true));
+    // client.disconnect(true);
+  }
+
+  handleDisconnect(client: any) {
+    console.log('ppp', client.id);
+    const users = this.userService.findAll();
+    console.log(users);
+  }
+
   @SubscribeMessage('login')
   login(client: Socket, data: string): void {
     this.userService.update(data, client.id);
