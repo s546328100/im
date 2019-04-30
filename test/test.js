@@ -1,7 +1,1 @@
-let s = [1, 2, 3, 4]
-
-let ss = 2
-
-for (const iterator in object) {
-  
-}
+for(i=0;++i<101;console.log(i%5?f||i:f+'Buzz'))f=i%3?'':'Fizz'
