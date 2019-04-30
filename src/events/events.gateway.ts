@@ -32,12 +32,10 @@ export class EventsGateway {
 
     const token = client.handshake.query.token;
     console.log(token);
-    if (!token || token !== 'dsc') {
-      client.disconnect(true);
+    if (!token || (token !== 'dsc' && token !== 'pop' && token !== 'sss')) {
+      return client.disconnect(true);
     }
-    // console.log('jjj', client.disconnect(true));
-    // client.disconnect(true);
-    // client.broadcast.emit('sysMessage', `${client.id} 进入房间！`);
+    client.broadcast.emit('sysMessage', `${token} 进入房间！`);
   }
 
   handleDisconnect(client: any) {
