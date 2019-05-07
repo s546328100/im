@@ -4,4 +4,3 @@ COPY . /app
 WORKDIR /app
 RUN yarn config set registry 'https://registry.npm.taobao.org'&&yarn
 EXPOSE 3001
-CMD [ "yarn", "start" ]
