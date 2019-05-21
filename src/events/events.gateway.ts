@@ -73,8 +73,9 @@ export class EventsGateway {
   }
 
   @SubscribeMessage('message')
-  message(client: Socket, data: string): void {
+  message(client: Socket, data: any[]): void {
     console.log(data);
+    client.broadcast.emit('message', data[0]);
     // const users = this.userService.findAll();
     // for (const key in users) {
     //   if (users.hasOwnProperty(key)) {
