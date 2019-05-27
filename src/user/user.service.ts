@@ -32,10 +32,10 @@ export class UserService {
 
   login(name: string) {
     if (!this.users[name]) {
-      return { code: 404 };
+      throw new Error();
     }
     this.users[name].state = 1;
-    return { code: 0, user: this.users[name] };
+    return this.users[name];
   }
 
   update(name: string, socketId = '') {
