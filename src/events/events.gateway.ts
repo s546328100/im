@@ -32,7 +32,7 @@ export class EventsGateway {
 
     const token = client.handshake.query.token;
     console.log(token);
-    if (!token || (token !== 'dsc' && token !== 'pop' && token !== 'sss')) {
+    if (!token || !this.userService.get(token)) {
       return client.disconnect(true);
     }
     client.broadcast.emit('sysMessage', `${token} 进入房间！`);
@@ -73,15 +73,23 @@ export class EventsGateway {
   }
 
   @SubscribeMessage('message')
-  message(client: Socket, data: any[]): void {
+  message(client: Socket, data: any[]): Observable<WsResponse<any>> {
     console.log(data);
-    client.broadcast.emit('message', data[0]);
-    // const users = this.userService.findAll();
-    // for (const key in users) {
-    //   if (users.hasOwnProperty(key)) {
-    //     this.server.sockets.to(users[key]).emit('message', data[0]);
-    //   }
-    // }
+    client.broadcast.emit('message', {
+      content: data[0],
+      time: Date.now(),
+      me: false,
+    });
+    return of(data).pipe(
+      map(item => ({
+        event: 'message',
+        data: {
+          content: item[0],
+          time: Date.now(),
+          me: true,
+        },
+      })),
+    );
   }
 
   @SubscribeMessage('events')
