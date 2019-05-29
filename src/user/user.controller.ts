@@ -17,16 +17,8 @@ export class UserController {
   }
 
   @Get()
-  user() {
-    const s: string[] = [];
-    const server = this.eventsGateway.server;
-    const sockets = server.sockets.sockets;
-    // console.log(sockets);
-    Object.keys(sockets).forEach(key => {
-      s.push(key);
-      // sockets[key].emit('events', { hello: 'world' });
-    });
-
-    return s;
+  user(@Query() param: any) {
+    console.log(param);
+    return this.service.get(param.name);
   }
 }

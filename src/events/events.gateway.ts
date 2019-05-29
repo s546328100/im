@@ -35,13 +35,14 @@ export class EventsGateway {
     if (!token || !this.userService.get(token)) {
       return client.disconnect(true);
     }
+    this.userService.updateSocket(token, client.id);
     client.broadcast.emit('sysMessage', `${token} 进入房间！`);
   }
 
   handleDisconnect(client: any) {
     console.log('go', client.id);
-    const users = this.userService.findAll();
-    // console.log(users);
+    const user = this.userService.delSocket(client.id);
+    this.userService.update(user, { state: 0 });
   }
 
   @SubscribeMessage('login')
@@ -74,19 +75,25 @@ export class EventsGateway {
 
   @SubscribeMessage('message')
   message(client: Socket, data: any[]): Observable<WsResponse<any>> {
-    console.log(data);
+    const user = this.userService.getUserBySocket(client.id);
     client.broadcast.emit('message', {
+      avatar: user.avatar,
+      name: user.name,
       content: data[0],
       time: Date.now(),
       me: false,
+      type: 'user',
     });
     return of(data).pipe(
       map(item => ({
         event: 'message',
         data: {
+          avatar: user.avatar,
+          name: user.name,
           content: item[0],
           time: Date.now(),
           me: true,
+          type: 'user',
         },
       })),
     );
