@@ -67,4 +67,8 @@ export class UserService {
   getUserBySocket(socketId: string) {
     return this.users[this.socketUsers[socketId]];
   }
+
+  getCurrUserCount() {
+    return Object.keys(this.socketUsers).length;
+  }
 }

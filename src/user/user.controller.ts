@@ -18,7 +18,11 @@ export class UserController {
 
   @Get()
   user(@Query() param: any) {
-    console.log(param);
     return this.service.get(param.name);
+  }
+
+  @Get('/count')
+  userCount() {
+    return this.service.getCurrUserCount();
   }
 }

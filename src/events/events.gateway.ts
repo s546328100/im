@@ -36,7 +36,10 @@ export class EventsGateway {
       return client.disconnect(true);
     }
     this.userService.updateSocket(token, client.id);
-    client.broadcast.emit('sysMessage', `${token} 进入房间！`);
+    client.broadcast.emit('message', {
+      content: token + ' 加人了群聊',
+      type: 'sys',
+    });
   }
 
   handleDisconnect(client: any) {

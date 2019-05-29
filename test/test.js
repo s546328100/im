@@ -1,11 +1,4 @@
-function queryString(JSON) {
-  let temp = [];
-  for (let k in JSON) {
-    temp.push(k + '=' + encodeURIComponent(JSON[k]));
-  }
-  return temp.length ? '?' : '' + temp.join('&');
-}
 
-let s = {};
-
-console.log(queryString(s));
+let date = new Date();
+console.log(date.getHours());
+console.log(date.getMinutes());
