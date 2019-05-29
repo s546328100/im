@@ -1,0 +1,14 @@
+{
+  "name": "im",
+  "script": "dist/main.js",
+  "cwd": "./",
+  "watch": false,
+  "ignore_watch": ["tmp", "logs", "node_modules"],
+  "env": {
+      "NODE_ENV": "production"
+  },
+  "engines": {
+      "node": ">=7.6"
+  },
+  "instances": 2
+}
