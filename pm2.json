@@ -9,6 +9,5 @@
   },
   "engines": {
       "node": ">=7.6"
-  },
-  "instances": 2
+  }
 }
