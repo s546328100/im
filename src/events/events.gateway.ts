@@ -41,6 +41,7 @@ export class EventsGateway {
       type: 'sys',
       new: 1,
     });
+    console.log(this.userService.getSockets());
   }
 
   handleDisconnect(client: any) {
@@ -52,6 +53,7 @@ export class EventsGateway {
       type: 'sys',
       new: -1,
     });
+    console.log(this.userService.findAll());
   }
 
   @SubscribeMessage('login')

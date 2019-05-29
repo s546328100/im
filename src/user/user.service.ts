@@ -33,6 +33,7 @@ export class UserService {
   // ];
 
   login(name: string) {
+    console.log(this.users[name]);
     if (!this.users[name] || this.users[name].state) {
       throw new Error();
     }
@@ -70,5 +71,9 @@ export class UserService {
 
   getCurrUserCount() {
     return Object.keys(this.socketUsers).length;
+  }
+
+  getSockets() {
+    return this.socketUsers;
   }
 }
