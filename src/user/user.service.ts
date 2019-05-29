@@ -33,7 +33,7 @@ export class UserService {
   // ];
 
   login(name: string) {
-    if (!this.users[name]) {
+    if (!this.users[name] || this.users[name].state) {
       throw new Error();
     }
     this.users[name].state = 1;

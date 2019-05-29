@@ -39,6 +39,7 @@ export class EventsGateway {
     client.broadcast.emit('message', {
       content: token + ' 加人了群聊',
       type: 'sys',
+      new: 1,
     });
   }
 
@@ -46,6 +47,11 @@ export class EventsGateway {
     console.log('go', client.id);
     const user = this.userService.delSocket(client.id);
     this.userService.update(user, { state: 0 });
+    client.broadcast.emit('message', {
+      content: user + ' 离开了群聊',
+      type: 'sys',
+      new: -1,
+    });
   }
 
   @SubscribeMessage('login')
