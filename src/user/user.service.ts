@@ -33,11 +33,11 @@ export class UserService {
   // ];
 
   login(name: string) {
-    console.log(this.users[name]);
     if (!this.users[name] || this.users[name].state) {
       throw new Error();
     }
     this.users[name].state = 1;
+    console.log(this.users[name]);
     return this.users[name];
   }
 
@@ -75,5 +75,16 @@ export class UserService {
 
   getSockets() {
     return this.socketUsers;
+  }
+
+  getCurrUserAll() {
+    const res = [];
+    for (const key in this.socketUsers) {
+      if (this.socketUsers.hasOwnProperty(key)) {
+        const su = this.socketUsers[key];
+        res.push(this.users[su]);
+      }
+    }
+    return res;
   }
 }

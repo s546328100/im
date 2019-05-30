@@ -25,4 +25,9 @@ export class UserController {
   userCount() {
     return this.service.getCurrUserCount();
   }
+
+  @Get('/all')
+  userAll() {
+    return this.service.getCurrUserAll();
+  }
 }
