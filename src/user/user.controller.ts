@@ -11,6 +11,11 @@ export class UserController {
 
   private users = {};
 
+  @Post()
+  create(@Body() param: any) {
+    return this.service.create(param);
+  }
+
   @Post('login')
   login(@Body() param: any) {
     return this.service.login(param.name);

@@ -1,7 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { Members } from 'src/entities/members';
+import { REPOSITORY_MEMBERS } from 'src/constants';
 
 @Injectable()
 export class UserService {
+  constructor(
+    @Inject(REPOSITORY_MEMBERS)
+    private readonly members: Repository<Members>,
+  ) {}
+
   private users = {
     sss: {
       name: 'sss',
@@ -31,6 +39,10 @@ export class UserService {
   //   '//robohash.org/VLO.png?set=set1&size=150x150',
   //   '//robohash.org/BE1.png?set=set2&size=150x150',
   // ];
+
+  create(body: any) {
+    return this.members.find();
+  }
 
   login(name: string) {
     if (!this.users[name] || this.users[name].state) {
